@@ -449,9 +449,12 @@
             <a href="#contact">CONTACT</a>
         </div>
 
-        <div class="theme-toggle" onclick="toggleTheme()">
-            <i class="fas fa-sun sun"></i>
-            <i class="fas fa-moon moon"></i>
+        <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle dark mode">
+            <div class="theme-icons">
+                <i class="fas fa-sun sun-icon"></i>
+                <i class="fas fa-moon moon-icon"></i>
+            </div>
+            <div class="toggle-circle"></div>
         </div>
     </nav>
 
@@ -542,31 +545,57 @@
             </form>
         </div>
     </section>
+
     <script>
-        // Function to toggle the theme
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            
-            // Save theme preference
-            const isDarkMode = document.body.classList.contains('dark-theme');
-            localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
-        }
-    
-        // Event Listener for DOM Content Loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize AOS
             AOS.init({
                 duration: 1000,
                 once: true
             });
     
-            // Check for saved theme preference
-            if (localStorage.getItem('darkMode') === 'true') {
-                document.body.classList.add('dark-theme');
+            // Bind the theme toggle button
+            const toggleButton = document.querySelector('.theme-toggle');
+            if (toggleButton) {
+                toggleButton.addEventListener('click', toggleTheme);
             }
     
-            // Bind the theme toggle button
-            document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
+            // Check for saved theme preference and system preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+            let savedTheme = localStorage.getItem('theme') || (prefersDark.matches ? 'dark' : 'light');
+            setTheme(savedTheme === 'dark');
+    
+            // Function to set theme
+            function setTheme(isDark) {
+                document.body.classList.toggle('dark-theme', isDark);
+                document.body.classList.toggle('light-theme', !isDark);
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                animateToggle();
+            }
+    
+            // Toggle theme function
+            function toggleTheme() {
+                let isDark = document.body.classList.contains('light-theme');
+                setTheme(isDark);
+            }
+    
+            // Animation for toggle
+            function animateToggle() {
+                const toggle = document.querySelector('.theme-toggle');
+                if (toggle) {
+                    toggle.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        toggle.style.transform = 'scale(1)';
+                    }, 100);
+                }
+            }
+    
+            // Listen for system theme changes
+            prefersDark.addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) { // Only change with system preference if no user preference
+                    setTheme(e.matches);
+                }
+            });
     
             // Active link handler to highlight navigation based on scroll
             const sections = document.querySelectorAll('section');
@@ -590,7 +619,8 @@
                 });
             });
         });
-    </script>    
+    </script>
+    
 </body>
 
 <!-- Footer -->
