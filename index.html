@@ -1,47 +1,606 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Askahf Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Agencia Digital - Modern Digital Agency</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* === Variabel CSS === */
+        :root {
+            /* Warna */
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --background-color: #ffffff;
+            --text-color: #333333;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --section-bg: #f9f9f9;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --footer-bg: #333;
+            --footer-text: #ffffff;
+            --btn-bg: #007bff;
 
+            /* Font */
+            --heading-font: 'Segoe UI', sans-serif;
+            --body-font: 'Arial', sans-serif;
+
+            /* Spacing */
+            --section-padding: 100px 5% 50px;
+            --content-width: 1200px;
+
+            /* Transitions */
+            --transition-speed: 0.3s;
+            --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark-theme {
+            --background-color: #1a1a1a;
+            --text-color: #ffffff;
+            --nav-bg: rgba(45, 45, 45, 0.95);
+            --section-bg: #2d2d2d;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --footer-bg: #1a1a1a;
+            --btn-bg: #0056b3;
+        }
+
+        /* === Reset dan Base Styles === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color var(--transition-speed) var(--transition-timing),
+                color var(--transition-speed) var(--transition-timing),
+                transform var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* === Navigation === */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s var(--transition-timing);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* === Theme Toggle === */
+        .theme-toggle {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: var(--section-bg);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.5s var(--transition-timing),
+                opacity 0.5s var(--transition-timing);
+        }
+
+        .dark-theme .theme-toggle .sun {
+            opacity: 0.5;
+            transform: rotate(180deg);
+        }
+
+        .dark-theme .theme-toggle .moon {
+            opacity: 1;
+            transform: rotate(0);
+        }
+
+        /* === Hero Section === */
+        .hero-section {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: slideUp 1s var(--transition-timing);
+        }
+
+        .hero-content h1 {
+            font-family: var(--heading-font);
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--success-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s var(--transition-timing),
+                box-shadow 0.3s var(--transition-timing);
+        }
+
+        .btn-primary {
+            background: var(--btn-bg);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--btn-bg);
+            color: var(--text-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: transform 0.5s var(--transition-timing);
+        }
+
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(-10deg) translateZ(50px);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--nav-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            backdrop-filter: blur(10px);
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .card-stats {
+            bottom: -20px;
+            right: -20px;
+        }
+
+        .card-clients {
+            top: -20px;
+            left: -20px;
+        }
+
+        /* === Sections === */
+        section {
+            min-height: 100vh;
+            padding: var(--section-padding);
+            display: flex;
+            align-items: center;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--section-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* === Services Grid === */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--nav-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s var(--transition-timing);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* === Contact Form === */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--nav-bg);
+            border-radius: 20px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 2px solid var(--shadow-color);
+            border-radius: 8px;
+            background: var(--background-color);
+            color: var(--text-color);
+            transition: border-color 0.3s var(--transition-timing);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* === Footer === */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: transform 0.3s var(--transition-timing),
+                color 0.3s var(--transition-timing);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* === Animations === */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* === Responsive Design === */
+        @media (max-width: 1024px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .floating-card {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-lg.fixed-top" style="background-color: green;">
-        <div class="container">
-          <a class="navbar-brand" href="#">Ashabul Kahfi</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About us</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Galery
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-   
+<body>
+    <nav>
+        <div class="logo">
+            <i class="fas fa-cube"></i>
+            Agencia Digital
+        </div>
+
+        <div class="nav-links">
+            <a href="#home" class="active">HOME</a>
+            <a href="#services">SERVICES</a>
+            <a href="#about">ABOUT</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-sun sun"></i>
+            <i class="fas fa-moon moon"></i>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="hero-section">
+            <div class="hero-content" data-aos="fade-right">
+                <h1>Transform Your Digital Presence</h1>
+                <p>We create innovative digital solutions that help businesses grow and succeed in the modern digital
+                    landscape.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary">Get Started</button>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+            </div>
+
+            <div class="hero-image" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"
+                    alt="Digital Agency">
+                <div class="floating-card card-stats">
+                    <h3>500+</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="floating-card card-clients">
+                    <h3>200+</h3>
+                    <p>Happy Clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>We offer a wide range of digital solutions, including web development, digital marketing, and graphic
+                design.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Web Development</h3>
+                <p>Custom websites tailored to your needs to boost your online presence.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-chart-line"></i>
+                <h3>Digital Marketing</h3>
+                <p>Increase your reach and engagement through targeted strategies and campaigns.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-paint-brush"></i>
+                <h3>Graphic Design</h3>
+                <p>Creative designs that bring your brand to life and make you stand out.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-title">
+            <h2>About Us</h2>
+            <p>Learn more about our values, our team, and our commitment to quality service.</p>
+        </div>
+        <p>We are a team of dedicated professionals passionate about providing innovative digital solutions. Our goal is
+            to help businesses thrive in a digital world.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Contact Us</h2>
+            <p>Have any questions? Reach out to us!</p>
+        </div>
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <script>
+        // Function to toggle the theme
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            
+            // Save theme preference
+            const isDarkMode = document.body.classList.contains('dark-theme');
+            localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
+        }
+    
+        // Event Listener for DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+    
+            // Check for saved theme preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-theme');
+            }
+    
+            // Bind the theme toggle button
+            document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
+    
+            // Active link handler to highlight navigation based on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+    
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                        current = section.getAttribute('id');
+                    }
+                });
+    
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>    
 </body>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Agencia Digital. All rights reserved.</p>
+    <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+</footer>
+
 </html>
