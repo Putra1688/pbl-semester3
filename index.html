@@ -1,636 +1,297 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agencia Digital - Modern Digital Agency</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <title>Pondok Pesantren Ashabul Kahfi</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        /* === Variabel CSS === */
-        :root {
-            /* Warna */
-            --primary-color: #007bff;
-            --secondary-color: #6c757d;
-            --success-color: #28a745;
-            --background-color: #ffffff;
-            --text-color: #333333;
-            --nav-bg: rgba(255, 255, 255, 0.95);
-            --section-bg: #f9f9f9;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --footer-bg: #333;
-            --footer-text: #ffffff;
-            --btn-bg: #007bff;
-
-            /* Font */
-            --heading-font: 'Segoe UI', sans-serif;
-            --body-font: 'Arial', sans-serif;
-
-            /* Spacing */
-            --section-padding: 100px 5% 50px;
-            --content-width: 1200px;
-
-            /* Transitions */
-            --transition-speed: 0.3s;
-            --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .dark-theme {
-            --background-color: #1a1a1a;
-            --text-color: #ffffff;
-            --nav-bg: rgba(45, 45, 45, 0.95);
-            --section-bg: #2d2d2d;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --footer-bg: #1a1a1a;
-            --btn-bg: #0056b3;
-        }
-
-        /* === Reset dan Base Styles === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color var(--transition-speed) var(--transition-timing),
-                color var(--transition-speed) var(--transition-timing),
-                transform var(--transition-speed) var(--transition-timing),
-                box-shadow var(--transition-speed) var(--transition-timing);
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
-
-        body {
-            font-family: var(--body-font);
-            line-height: 1.6;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
-
-        /* === Navigation === */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--nav-bg);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px var(--shadow-color);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo i {
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s var(--transition-timing);
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        /* === Theme Toggle === */
-        .theme-toggle {
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            background: var(--section-bg);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-        }
-
-        .theme-toggle i {
-            transition: transform 0.5s var(--transition-timing),
-                opacity 0.5s var(--transition-timing);
-        }
-
-        .dark-theme .theme-toggle .sun {
-            opacity: 0.5;
-            transform: rotate(180deg);
-        }
-
-        .dark-theme .theme-toggle .moon {
-            opacity: 1;
-            transform: rotate(0);
-        }
-
-        /* === Hero Section === */
-        .hero-section {
-            max-width: var(--content-width);
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-content {
-            animation: slideUp 1s var(--transition-timing);
-        }
-
-        .hero-content h1 {
-            font-family: var(--heading-font);
-            font-size: 3rem;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--success-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            color: var(--text-color);
-            opacity: 0.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s var(--transition-timing),
-                box-shadow 0.3s var(--transition-timing);
-        }
-
-        .btn-primary {
-            background: var(--btn-bg);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--btn-bg);
-            color: var(--text-color);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px var(--shadow-color);
-        }
-
-        .hero-image {
-            position: relative;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            transition: transform 0.5s var(--transition-timing);
-        }
-
-        .hero-image:hover img {
-            transform: perspective(1000px) rotateY(-10deg) translateZ(50px);
-        }
-
-        .floating-card {
-            position: absolute;
-            background: var(--nav-bg);
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            backdrop-filter: blur(10px);
-            animation: float 3s infinite ease-in-out;
-        }
-
-        .card-stats {
-            bottom: -20px;
-            right: -20px;
-        }
-
-        .card-clients {
-            top: -20px;
-            left: -20px;
-        }
-
-        /* === Sections === */
-        section {
-            min-height: 100vh;
-            padding: var(--section-padding);
-            display: flex;
-            align-items: center;
-        }
-
-        section:nth-child(even) {
-            background-color: var(--section-bg);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        /* === Services Grid === */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--nav-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s var(--transition-timing);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .service-card i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        /* === Contact Form === */
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: var(--nav-bg);
-            border-radius: 20px;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            backdrop-filter: blur(10px);
-        }
-
-        .contact-form {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-group label {
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 0.8rem;
-            border: 2px solid var(--shadow-color);
-            border-radius: 8px;
-            background: var(--background-color);
-            color: var(--text-color);
-            transition: border-color 0.3s var(--transition-timing);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        /* === Footer === */
-        footer {
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .social-links a {
-            color: var(--footer-text);
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: transform 0.3s var(--transition-timing),
-                color 0.3s var(--transition-timing);
-        }
-
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-
-        /* === Animations === */
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* === Responsive Design === */
-        @media (max-width: 1024px) {
-            .hero-section {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
-            }
-
-            .cta-buttons {
-                justify-content: center;
-            }
-
-            .floating-card {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="img/site.webmanifest">
 </head>
 
 <body>
+    <!-- Navigation -->
     <nav>
-        <div class="logo">
-            <i class="fas fa-cube"></i>
-            Agencia Digital
-        </div>
-
+        <a href="#" class="logo">
+            <img src="img/logo.png" alt="Ashabul Kahfi Logo" class="logo-icon">
+            <span class="logo-text">ASHABUL KAHFI</span>
+        </a>
         <div class="nav-links">
-            <a href="#home" class="active">HOME</a>
-            <a href="#services">SERVICES</a>
-            <a href="#about">ABOUT</a>
-            <a href="#contact">CONTACT</a>
-        </div>
-
-        <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle dark mode">
-            <div class="theme-icons">
-                <i class="fas fa-sun sun-icon"></i>
-                <i class="fas fa-moon moon-icon"></i>
-            </div>
-            <div class="toggle-circle"></div>
+            <a href="#home" class="active">Beranda</a>
+            <a href="#kegiatan">Kegiatan</a>
+            <a href="#about">Profil</a>
+            <a href="#contact">Contact</a>
+            <a href="">Login</a>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
         </div>
     </nav>
 
-    <section id="home">
+    <!-- Hero Section -->
+    <section id="home" class="section">
         <div class="hero-section">
             <div class="hero-content" data-aos="fade-right">
-                <h1>Transform Your Digital Presence</h1>
-                <p>We create innovative digital solutions that help businesses grow and succeed in the modern digital
-                    landscape.</p>
+                <h1>Pondok Pesantren Ashabul Kahfi</h1>
+                <p class="hero-description">
+                    Membentuk generasi yang berilmu, berakhlak mulia, dan siap menghadapi
+                    tantangan masa depan. Bergabunglah dengan komunitas kami di Jawa Timur.
+                </p>
                 <div class="cta-buttons">
-                    <button class="btn btn-primary">Get Started</button>
-                    <button class="btn btn-secondary">Learn More</button>
+                    <a href="formulir.html" class="cta-button primary-button">Daftar Sekarang →</a>
+                    <a href="#about" class="cta-button secondary-button">Pelajari Lebih Lanjut</a>
                 </div>
             </div>
-
             <div class="hero-image" data-aos="fade-left">
                 <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1000&auto=format&fit=crop"
-                    alt="Digital Agency">
-                <div class="floating-card card-stats">
-                    <h3>500+</h3>
-                    <p>Projects Completed</p>
-                </div>
-                <div class="floating-card card-clients">
-                    <h3>200+</h3>
-                    <p>Happy Clients</p>
-                </div>
+                    alt="Pondok Pesantren">
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services">
-        <div class="section-title">
-            <h2>Our Services</h2>
-            <p>We offer a wide range of digital solutions, including web development, digital marketing, and graphic
-                design.</p>
+    <!-- Kegiatan Section -->
+    <section id="kegiatan" class="section">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Kegiatan Pondok</h2>
+            <p>Berbagai kegiatan yang membentuk karakter dan meningkatkan kemampuan santri</p>
         </div>
-        <div class="services-grid">
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-laptop-code"></i>
-                <h3>Web Development</h3>
-                <p>Custom websites tailored to your needs to boost your online presence.</p>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-chart-line"></i>
-                <h3>Digital Marketing</h3>
-                <p>Increase your reach and engagement through targeted strategies and campaigns.</p>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-paint-brush"></i>
-                <h3>Graphic Design</h3>
-                <p>Creative designs that bring your brand to life and make you stand out.</p>
+        <div class="activities-container">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <!-- Activity Cards -->
+                    <div class="swiper-slide">
+                        <div class="activity-card">
+                            <img src="/api/placeholder/400/300" alt="Kegiatan Tahfidz" class="activity-image">
+                            <div class="activity-content">
+                                <h3>Program Tahfidz</h3>
+                                <p>Program unggulan menghafal Al-Quran dengan bimbingan ustadz berpengalaman</p>
+                                <a href="#" class="activity-link">Pelajari lebih lanjut →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More Activity Cards -->
+                    <div class="swiper-slide">
+                        <div class="activity-card">
+                            <img src="/api/placeholder/400/300" alt="Kegiatan Akademik" class="activity-image">
+                            <div class="activity-content">
+                                <h3>Pendidikan Formal</h3>
+                                <p>Pembelajaran akademik sesuai kurikulum nasional dan pesantren</p>
+                                <a href="#" class="activity-link">Pelajari lebih lanjut →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="activity-card">
+                            <img src="/api/placeholder/400/300" alt="Kegiatan Ekstrakurikuler" class="activity-image">
+                            <div class="activity-content">
+                                <h3>Ekstrakurikuler</h3>
+                                <p>Pengembangan bakat dan minat melalui berbagai kegiatan</p>
+                                <a href="#" class="activity-link">Pelajari lebih lanjut →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="section-title">
-            <h2>About Us</h2>
-            <p>Learn more about our values, our team, and our commitment to quality service.</p>
+    <!-- Profile Section -->
+    <section id="about" class="section">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Profil Pondok Pesantren</h2>
+            <p>Mengenal lebih dekat Pondok Pesantren Ashabul Kahfi</p>
         </div>
-        <p>We are a team of dedicated professionals passionate about providing innovative digital solutions. Our goal is
-            to help businesses thrive in a digital world.</p>
+        <div class="profile-grid">
+            <div class="profile-card" data-aos="fade-up">
+                <div class="profile-icon">📚</div>
+                <h3>Visi dan Misi</h3>
+                <p>Membentuk generasi Qurani yang berakhlak mulia dan berwawasan luas</p>
+            </div>
+            <div class="profile-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="profile-icon">🎯</div>
+                <h3>Program Unggulan</h3>
+                <p>Program tahfidz, bahasa Arab & Inggris, dan entrepreneurship</p>
+            </div>
+            <div class="profile-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="profile-icon">🏢</div>
+                <h3>Fasilitas</h3>
+                <p>Asrama nyaman, masjid, perpustakaan, dan laboratorium modern</p>
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <div class="section-title">
-            <h2>Contact Us</h2>
-            <p>Have any questions? Reach out to us!</p>
+    <section id="contact" class="section">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Hubungi Kami</h2>
+            <p>Punya pertanyaan? Jangan ragu untuk menghubungi kami</p>
         </div>
         <div class="contact-container">
-            <form class="contact-form">
+            <div class="contact-info" data-aos="fade-right">
+                <h3>Informasi Kontak</h3>
+                <div class="contact-info-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Alamat</h4>
+                        <a href="https://maps.app.goo.gl/hA4nfJUxyEtj36gD9" target="_blank" >Jl. Semanggi Bar. No.1a, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</a>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Telepon</h4>
+                        <p>Santri Putra : 085785872572 (Sugiono) <br> Santri Putri : 085784880315 (Lily)</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@ashabulkahfi.ac.id</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" data-aos="fade-left">
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" placeholder="Nama Lengkap" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" placeholder="Email" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <input type="text" placeholder="Subjek" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
+                <div class="form-group">
+                    <textarea placeholder="Pesan" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="cta-button primary-button">Kirim Pesan</button>
             </form>
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Ashabul Kahfi</h3>
+                <p>Membentuk generasi Qurani yang berakhlak mulia dan berwawasan luas</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#about">Profil</a></li>
+                    <li><a href="#kegiatan">Kegiatan</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Social Media</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/yourpage" aria-label="Facebook" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/yourusername" aria-label="Instagram" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.twitter.com/yourusername" aria-label="Twitter" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2024 Pondok Pesantren Ashabul Kahfi. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize AOS
-            AOS.init({
-                duration: 1000,
-                once: true
-            });
-    
-            // Bind the theme toggle button
-            const toggleButton = document.querySelector('.theme-toggle');
-            if (toggleButton) {
-                toggleButton.addEventListener('click', toggleTheme);
-            }
-    
-            // Check for saved theme preference and system preference
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-            let savedTheme = localStorage.getItem('theme') || (prefersDark.matches ? 'dark' : 'light');
-            setTheme(savedTheme === 'dark');
-    
-            // Function to set theme
-            function setTheme(isDark) {
-                document.body.classList.toggle('dark-theme', isDark);
-                document.body.classList.toggle('light-theme', !isDark);
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                animateToggle();
-            }
-    
-            // Toggle theme function
-            function toggleTheme() {
-                let isDark = document.body.classList.contains('light-theme');
-                setTheme(isDark);
-            }
-    
-            // Animation for toggle
-            function animateToggle() {
-                const toggle = document.querySelector('.theme-toggle');
-                if (toggle) {
-                    toggle.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        toggle.style.transform = 'scale(1)';
-                    }, 100);
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Initialize Swiper
+        new Swiper('.swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
                 }
             }
-    
-            // Listen for system theme changes
-            prefersDark.addEventListener('change', (e) => {
-                if (!localStorage.getItem('theme')) { // Only change with system preference if no user preference
-                    setTheme(e.matches);
-                }
-            });
-    
-            // Active link handler to highlight navigation based on scroll
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-links a');
-    
+
             window.addEventListener('scroll', () => {
                 let current = '';
+
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    if (scrollY >= sectionTop - sectionHeight / 3) {
                         current = section.getAttribute('id');
                     }
                 });
-    
+
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === current) {
+                    if (link.getAttribute('href') === '#' + current) {
                         link.classList.add('active');
                     }
                 });
             });
         });
-    </script>
-    
-</body>
 
-<!-- Footer -->
-<footer>
-    <p>&copy; 2024 Agencia Digital. All rights reserved.</p>
-    <div class="social-links">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-    </div>
-</footer>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.querySelector('.theme-toggle');
+            const body = document.body;
+
+            // Check and apply the current theme from localStorage
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark-mode') {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+
+            toggleButton.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode');
+                // Force restart of the animation
+                toggleButton.style.animation = 'none';
+                setTimeout(() => {
+                    toggleButton.style.animation = '';
+                }, 10);
+            });
+        });
+    </script>
+</body>
 
 </html>
