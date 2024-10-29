@@ -27,7 +27,7 @@
             <a href="#kegiatan">Kegiatan</a>
             <a href="#about">Profil</a>
             <a href="#contact">Contact</a>
-            <a href="">Login</a>
+            <a href="#" class="login-link">Login</a>
             <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
         </div>
     </nav>
@@ -140,7 +140,8 @@
                     <div class="contact-icon">📍</div>
                     <div>
                         <h4>Alamat</h4>
-                        <a href="https://maps.app.goo.gl/hA4nfJUxyEtj36gD9" target="_blank" >Jl. Semanggi Bar. No.1a, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</a>
+                        <a href="https://maps.app.goo.gl/hA4nfJUxyEtj36gD9" target="_blank">Jl. Semanggi Bar. No.1a,
+                            Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</a>
                     </div>
                 </div>
                 <div class="contact-info-item">
@@ -211,6 +212,81 @@
             © 2024 Pondok Pesantren Ashabul Kahfi. All rights reserved.
         </div>
     </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+
+            <!-- Role Selection -->
+            <div id="roleSelection">
+                <h2>Pilih Peran</h2>
+                <div class="role-buttons">
+                    <button id="santriRoleBtn" class="role-btn">Santri</button>
+                    <button id="adminRoleBtn" class="role-btn">Admin</button>
+                </div>
+            </div>
+
+            <!-- Santri Login Form (initially hidden) -->
+            <form id="loginFormSantri" class="login-form" style="display: none;">
+                <h2>Login Santri</h2>
+                <div class="form-group">
+                    <label for="santriEmail">Email</label>
+                    <input type="email" id="santriEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="santriPassword">Password</label>
+                    <input type="password" id="santriPassword" name="password" required>
+                </div>
+                <div class="form-group remember-forgot">
+                    <label>
+                        <input type="checkbox" name="remember"> Ingat saya
+                    </label>
+                    <a href="#" class="forgot-password">Lupa password?</a>
+                </div>
+                <button type="submit" class="login-submit-btn">Masuk</button>
+                <div class="login-footer">
+                    Belum punya akun? <a href="#" id="registerLink">Daftar</a>
+                </div>
+            </form>
+
+            <!-- register -->
+            <form id="registerForm" class="register-form" style="display: none;">
+                <h2>Daftar</h2>
+                <div class="form-group">
+                    <label for="registerName">Nama Lengkap</label>
+                    <input type="name" id="registerName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerTelp">Nomor HP</label>
+                    <input type="telp" id="registerTelp" name="telp" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" name="password" required>
+                </div>
+                <button type="submit" class="register-submit-btn">Daftar</button>
+            </form>
+
+            <!-- Admin Login Form (initially hidden) -->
+            <form id="loginFormAdmin" class="login-form" style="display: none;">
+                <h2>Login Admin</h2>
+                <div class="form-group">
+                    <label for="adminUsername">Username</label>
+                    <input type="text" id="adminUsername" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" name="password" required>
+                </div>
+                <button type="submit" class="login-submit-btn">Masuk</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -292,6 +368,73 @@
             });
         });
     </script>
+
+    <!-- Login -->
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('loginModal');
+        const closeButton = document.querySelector('.close-button');
+        const loginLink = document.querySelector('.login-link');
+
+        // Get role selection elements
+        const roleSelection = document.getElementById('roleSelection');
+        const santriRoleBtn = document.getElementById('santriRoleBtn');
+        const adminRoleBtn = document.getElementById('adminRoleBtn');
+
+        // Get login form elements
+        const loginFormSantri = document.getElementById('loginFormSantri');
+        const loginFormAdmin = document.getElementById('loginFormAdmin');
+
+        // Open modal when login link is clicked
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        // Close modal when close button is clicked or when clicking outside of it
+        const closeModal = () => {
+            modal.style.display = 'none';
+            resetModal();
+        };
+
+        closeButton.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Show login form based on role selection
+        const showLoginForm = (formToShow) => {
+            roleSelection.style.display = 'none';
+            loginFormSantri.style.display = 'none';
+            loginFormAdmin.style.display = 'none';
+            formToShow.style.display = 'flex';
+        };
+
+        santriRoleBtn.addEventListener('click', () => showLoginForm(loginFormSantri));
+        adminRoleBtn.addEventListener('click', () => showLoginForm(loginFormAdmin));
+
+        // Reset modal to initial state
+        function resetModal() {
+            roleSelection.style.display = 'block';
+            loginFormSantri.style.display = 'none';
+            loginFormAdmin.style.display = 'none';
+        }
+
+        // Prevent form submission and log form type
+        const preventFormSubmit = (form, type) => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                console.log(`${type} login submitted`);
+                // Add your login logic here
+            });
+        };
+
+        preventFormSubmit(loginFormSantri, 'Santri');
+        preventFormSubmit(loginFormAdmin, 'Admin');
+    </script>
+
 </body>
 
 </html>
