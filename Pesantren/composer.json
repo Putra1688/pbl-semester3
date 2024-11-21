@@ -1,0 +1,22 @@
+{
+    "name": "herry/ashabulkahfi",
+    "description": "Projek PBL Ashabu Kahfi Semester 3",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Herry\\Ashabulkahfi\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Herry\\Ashabulkahfi\\": "app/"
+        
+        }
+    },
+    "require": {
+        "php": ">=8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5.8"
+    }
+}

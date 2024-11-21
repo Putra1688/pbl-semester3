@@ -1,6 +1,11 @@
 
 <?php
-session_start();
 
-require_once '../app/init.php';
-$app = new App;
+require_once __DIR__ ."/../vendor/autoload.php";
+
+use Herry\Ashabulkahfi\App\Core\{
+    Router,
+    Controller
+};
+
+

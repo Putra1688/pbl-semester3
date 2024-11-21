@@ -1,4 +1,4 @@
-<footer>
+<!-- <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Ashabul Kahfi</h3>
@@ -28,4 +28,4 @@
     </footer>
     <script src="<?= BASEURL ?>/js/main.js"></script>
 </body>
-</html>
+</html> -->

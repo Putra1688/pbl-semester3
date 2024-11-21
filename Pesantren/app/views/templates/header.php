@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,4 +25,4 @@
             <?php endif; ?>
             <button class="theme-toggle">🌓</button>
         </div>
-    </nav>
+    </nav> -->
