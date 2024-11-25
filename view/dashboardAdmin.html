@@ -188,6 +188,45 @@
             transition: background-color 0.3s ease;
         }
 
+        .jadwal-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .jadwal-box {
+            background-color: var(--card-color);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1 1 calc(33.333% - 1rem);
+            min-width: 250px;
+        }
+
+        .jadwal-box h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .jadwal-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .jadwal-box ul li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-sm {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+        }
+
         button:hover {
             background-color: #2980B9;
         }
@@ -208,7 +247,11 @@
 
         th {
             color: var(--text-secondary);
-            font-weight: 600;
+            font-weight: bold;
+        }
+
+        td {
+            vertical-align: middle;
         }
 
         /* Responsive Design */
@@ -286,7 +329,8 @@
             <!-- Data Santri Section -->
             <section id="santri" class="content-section">
                 <h2>Data Santri</h2>
-                <button class="btn btn-primary">Tambah Santri</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambahSantri">Tambah
+                    Santri</button>
                 <table>
                     <thead>
                         <tr>
@@ -322,33 +366,164 @@
                 </table>
             </section>
 
+            <!-- Modal Tambah Santri -->
+            <div class="modal fade" id="modalTambahSantri" tabindex="-1" role="dialog"
+                aria-labelledby="tambahSantriLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="tambahSantriLabel">Tambah Santri Baru</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formTambahSantri">
+                                <div class="form-group">
+                                    <label for="nis">NIS:</label>
+                                    <input type="text" class="form-control" id="nis" name="nis" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama">Nama Lengkap:</label>
+                                    <input type="text" class="form-control" id="nama" name="nama" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kelas">Kelas:</label>
+                                    <input type="text" class="form-control" id="kelas" name="kelas" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Status:</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="aktif">Aktif</option>
+                                        <option value="tidak aktif">Tidak Aktif</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary" form="formTambahSantri">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- Jadwal Section -->
             <section id="jadwal" class="content-section">
                 <h2>Jadwal</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Jam Mulai</th>
-                            <th>Jam Selesai</th>
-                            <th>Mata Pelajaran</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>24-04-2024</td>
-                            <td>08.00 WIB</td>
-                            <td>10.00 WIB</td>
-                            <td>Bahasa Indonesia</td>
-                            <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Hapus</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="jadwal-container">
+                    <!-- Box untuk Hari Senin -->
+                    <div class="jadwal-box" id="jadwalSenin">
+                        <h3>Senin</h3>
+                        <ul id="listJadwalSenin">
+                            <!-- Jadwal akan dimasukkan secara dinamis -->
+                            <li data-id="1">
+                                <span>08:00 - 10:00</span> - <strong>Bahasa Indonesia</strong>
+                                <button class="btn btn-primary btn-sm edit-jadwal">Edit</button>
+                                <button class="btn btn-danger btn-sm delete-jadwal">Hapus</button>
+                            </li>
+                            <li data-id="2">
+                                <span>10:30 - 12:00</span> - <strong>Matematika</strong>
+                                <button class="btn btn-primary btn-sm edit-jadwal">Edit</button>
+                                <button class="btn btn-danger btn-sm delete-jadwal">Hapus</button>
+                            </li>
+                        </ul>
+                        <button class="btn btn-success btn-sm tambah-jadwal" data-day="senin">Tambah Jadwal</button>
+                    </div>
+                    <!-- Box untuk Hari Selasa -->
+                    <div class="jadwal-box" id="jadwalSelasa">
+                        <h3>Selasa</h3>
+                        <ul id="listJadwalSelasa">
+                            <!-- Jadwal akan dimasukkan secara dinamis -->
+                        </ul>
+                        <button class="btn btn-success btn-sm tambah-jadwal" data-day="selasa">Tambah Jadwal</button>
+                    </div>
+                    <!-- Box untuk Hari Rabu -->
+                    <div class="jadwal-box" id="jadwalRabu">
+                        <h3>Rabu</h3>
+                        <ul id="listJadwalRabu">
+                            <!-- Jadwal akan dimasukkan secara dinamis -->
+                        </ul>
+                        <button class="btn btn-success btn-sm tambah-jadwal" data-day="rabu">Tambah Jadwal</button>
+                    </div>
+                    <!-- Box untuk Hari Kamis -->
+                    <div class="jadwal-box" id="jadwalKamis">
+                        <h3>Kamis</h3>
+                        <ul id="listJadwalKamis">
+                            <!-- Jadwal akan dimasukkan secara dinamis -->
+                        </ul>
+                        <button class="btn btn-success btn-sm tambah-jadwal" data-day="kamis">Tambah Jadwal</button>
+                    </div>
+                    <!-- Box untuk Hari Jumat -->
+                    <div class="jadwal-box" id="jadwalJumat">
+                        <h3>Jumat</h3>
+                        <ul id="listJadwalJumat">
+                            <!-- Jadwal akan dimasukkan secara dinamis -->
+                        </ul>
+                        <button class="btn btn-success btn-sm tambah-jadwal" data-day="jumat">Tambah Jadwal</button>
+                    </div>
+                    <!-- Box untuk Hari Sabtu -->
+                    <div class="jadwal-box" id="jadwalSabtu">
+                        <h3>Sabtu</h3>
+                        <ul id="listJadwalSabtu">
+                            <!-- Jadwal akan dimasukkan secara dinamis -->
+                        </ul>
+                        <button class="btn btn-success btn-sm tambah-jadwal" data-day="sabtu">Tambah Jadwal</button>
+                    </div>
+                    <!-- Box untuk Hari Minggu -->
+                    <div class="jadwal-box" id="jadwalMinggu">
+                        <h3>Minggu</h3>
+                        <ul id="listJadwalMinggu">
+                            <!-- Jadwal akan dimasukkan secara dinamis -->
+                        </ul>
+                        <button class="btn btn-success btn-sm tambah-jadwal" data-day="sabtu">Tambah Jadwal</button>
+                    </div>
+                </div>
             </section>
+
+            <!-- Modal Edit Jadwal -->
+            <div class="modal fade" id="modalJadwal" tabindex="-1" role="dialog" aria-labelledby="modalJadwalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalJadwalLabel">Tambah/Edit Jadwal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formJadwal">
+                                <input type="hidden" id="jadwalId" name="jadwalId">
+                                <div class="form-group">
+                                    <label for="hari">Hari:</label>
+                                    <input type="text" class="form-control" id="hari" name="hari" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jamMulai">Jam Mulai:</label>
+                                    <input type="time" class="form-control" id="jamMulai" name="jamMulai" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jamSelesai">Jam Selesai:</label>
+                                    <input type="time" class="form-control" id="jamSelesai" name="jamSelesai" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mataPelajaran">Mata Pelajaran:</label>
+                                    <input type="text" class="form-control" id="mataPelajaran" name="mataPelajaran"
+                                        required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary" form="formJadwal">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
             <!-- Perizinan Section -->
             <section id="perizinan" class="content-section">
@@ -380,36 +555,182 @@
 
             <!-- Tagihan Section -->
             <section id="tagihan" class="content-section">
+                <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBuatTagihan">Buat Tagihan
+                    Baru</button>
                 <h2>Tagihan</h2>
-                <button class="btn btn-primary">Buat Tagihan Baru</button>
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Santri</th>
+                            <th>Nama Santri</th>
                             <th>Jenis Tagihan</th>
                             <th>Jumlah</th>
-                            <th>Status</th>
                             <th>Jatuh Tempo</th>
+                            <th>Status</th>
+                            <th>Bukti Pembayaran</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Contoh Data -->
                         <tr>
-                            <td>T001</td>
                             <td>Ahmad Fauzi</td>
                             <td>SPP Mei</td>
                             <td>Rp 1.000.000</td>
+                            <td>15 Mei 2024</td>
                             <td>Pending</td>
-                            <td>15-05-2024</td>
                             <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Hapus</button>
+                                <button class="btn btn-secondary btn-sm lihat-bukti" data-url="path/to/bukti1.jpg">Lihat
+                                    Bukti</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-sm verifikasi-tagihan" data-id="1">Tandai
+                                    Lunas</button>
+                                <button class="btn btn-danger btn-sm tolak-tagihan" data-id="1">Tandai Belum
+                                    Lunas</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Muhammad Rizki</td>
+                            <td>SPP Mei</td>
+                            <td>Rp 1.000.000</td>
+                            <td>15 Mei 2024</td>
+                            <td>Lunas</td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm lihat-bukti" data-url="path/to/bukti2.jpg"
+                                    disabled>Bukti Tidak Tersedia</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm tolak-tagihan" data-id="2">Tandai Belum
+                                    Lunas</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </section>
+
+            <!-- Modal Buat Tagihan Baru -->
+            <div class="modal fade" id="modalBuatTagihan" tabindex="-1" role="dialog"
+                aria-labelledby="modalBuatTagihanLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBuatTagihanLabel">Buat Tagihan Baru</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formBuatTagihan">
+                                <div class="form-group">
+                                    <label for="namaSantri">Nama Santri:</label>
+                                    <input type="text" class="form-control" id="namaSantri" name="namaSantri"
+                                        placeholder="Masukkan nama santri" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jenisTagihan">Jenis Tagihan:</label>
+                                    <input type="text" class="form-control" id="jenisTagihan" name="jenisTagihan"
+                                        placeholder="Contoh: SPP Mei" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jumlahTagihan">Jumlah:</label>
+                                    <input type="number" class="form-control" id="jumlahTagihan" name="jumlahTagihan"
+                                        placeholder="Masukkan jumlah tagihan" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jatuhTempo">Jatuh Tempo:</label>
+                                    <input type="date" class="form-control" id="jatuhTempo" name="jatuhTempo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="statusTagihan">Status:</label>
+                                    <select class="form-control" id="statusTagihan" name="statusTagihan">
+                                        <option value="pending">Pending</option>
+                                        <option value="unpaid">Belum Lunas</option>
+                                        <option value="paid">Lunas</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary" form="formBuatTagihan">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal Lihat Bukti Pembayaran -->
+            <div class="modal fade" id="modalBuktiPembayaran" tabindex="-1" role="dialog"
+                aria-labelledby="buktiPembayaranLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="buktiPembayaranLabel">Bukti Pembayaran</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img id="buktiPembayaranImg" src="" alt="Bukti Pembayaran" class="img-fluid">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal Buat Tagihan Baru -->
+            <div class="modal fade" id="modalBuatTagihan" tabindex="-1" role="dialog" aria-labelledby="buatTagihanLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="buatTagihanLabel">Buat Tagihan Baru</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formBuatTagihan">
+                                <div class="form-group">
+                                    <label for="santri">Santri:</label>
+                                    <input type="text" class="form-control" id="santri" name="santri"
+                                        placeholder="Masukkan nama santri" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jenisTagihan">Jenis Tagihan:</label>
+                                    <input type="text" class="form-control" id="jenisTagihan" name="jenisTagihan"
+                                        placeholder="Contoh: SPP Mei" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jumlahTagihan">Jumlah:</label>
+                                    <input type="number" class="form-control" id="jumlahTagihan" name="jumlahTagihan"
+                                        placeholder="Masukkan jumlah tagihan" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="statusTagihan">Status:</label>
+                                    <select class="form-control" id="statusTagihan" name="statusTagihan">
+                                        <option value="pending">Pending</option>
+                                        <option value="paid">Paid</option>
+                                        <option value="unpaid">Unpaid</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jatuhTempo">Jatuh Tempo:</label>
+                                    <input type="date" class="form-control" id="jatuhTempo" name="jatuhTempo" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary" form="formBuatTagihan">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Settings Section -->
             <section id="pengaturan" class="content-section">
@@ -447,6 +768,7 @@
             const sections = document.querySelectorAll('.content-section');
 
             function setActiveSection(activeId) {
+                $('.modal').modal('hide'); // Menutup semua modal yang aktif
                 sections.forEach(section => {
                     section.style.display = 'none'; // Hide all sections
                 });
@@ -519,7 +841,147 @@
                 });
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const jadwalContainer = document.querySelector('.jadwal-container');
+            const modal = $('#modalJadwal');
+
+            // Tambah Jadwal
+            jadwalContainer.addEventListener('click', function (e) {
+                if (e.target.classList.contains('tambah-jadwal')) {
+                    const day = e.target.getAttribute('data-day');
+                    document.getElementById('hari').value = day;
+                    document.getElementById('jadwalId').value = '';
+                    document.getElementById('jamMulai').value = '';
+                    document.getElementById('jamSelesai').value = '';
+                    document.getElementById('mataPelajaran').value = '';
+                    modal.modal('show');
+                }
+            });
+
+            // Edit Jadwal
+            jadwalContainer.addEventListener('click', function (e) {
+                if (e.target.classList.contains('edit-jadwal')) {
+                    const listItem = e.target.closest('li');
+                    const day = listItem.closest('.jadwal-box').id.replace('jadwal', '');
+                    document.getElementById('hari').value = day;
+                    document.getElementById('jadwalId').value = listItem.getAttribute('data-id');
+                    document.getElementById('jamMulai').value = '08:00'; // Ganti dengan data asli
+                    document.getElementById('jamSelesai').value = '10:00'; // Ganti dengan data asli
+                    document.getElementById('mataPelajaran').value = 'Bahasa Indonesia'; // Ganti dengan data asli
+                    modal.modal('show');
+                }
+            });
+
+            // Hapus Jadwal
+            jadwalContainer.addEventListener('click', function (e) {
+                if (e.target.classList.contains('delete-jadwal')) {
+                    const listItem = e.target.closest('li');
+                    listItem.remove();
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lihat Bukti Pembayaran
+            document.querySelectorAll('.lihat-bukti').forEach(button => {
+                button.addEventListener('click', function () {
+                    const buktiUrl = this.getAttribute('data-url');
+                    if (buktiUrl) {
+                        document.getElementById('buktiPembayaranImg').src = buktiUrl;
+                        $('#modalBuktiPembayaran').modal('show');
+                    }
+                });
+            });
+
+            // Verifikasi Tagihan (Tandai Lunas)
+            document.querySelectorAll('.verifikasi-tagihan').forEach(button => {
+                button.addEventListener('click', function () {
+                    const paymentId = this.getAttribute('data-id');
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: 'Tagihan akan ditandai sebagai lunas.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, tandai lunas!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire('Berhasil!', 'Tagihan telah ditandai sebagai lunas.', 'success');
+                            // Update status di tabel
+                            const row = this.closest('tr');
+                            row.querySelector('td:nth-child(5)').textContent = 'Lunas';
+                        }
+                    });
+                });
+            });
+
+            // Tolak Tagihan (Tandai Belum Lunas)
+            document.querySelectorAll('.tolak-tagihan').forEach(button => {
+                button.addEventListener('click', function () {
+                    const paymentId = this.getAttribute('data-id');
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: 'Tagihan akan ditandai sebagai belum lunas.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, tandai belum lunas!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire('Berhasil!', 'Tagihan telah ditandai sebagai belum lunas.', 'error');
+                            // Update status di tabel
+                            const row = this.closest('tr');
+                            row.querySelector('td:nth-child(5)').textContent = 'Belum Lunas';
+                        }
+                    });
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const formBuatTagihan = document.getElementById('formBuatTagihan');
+            const tbody = document.querySelector('#tagihanAdmin table tbody');
+
+            formBuatTagihan.addEventListener('submit', function (e) {
+                e.preventDefault(); // Mencegah reload halaman
+
+                // Ambil data dari form
+                const namaSantri = document.getElementById('namaSantri').value;
+                const jenisTagihan = document.getElementById('jenisTagihan').value;
+                const jumlahTagihan = document.getElementById('jumlahTagihan').value;
+                const jatuhTempo = document.getElementById('jatuhTempo').value;
+                const statusTagihan = document.getElementById('statusTagihan').value;
+
+                // Tambahkan baris baru ke tabel
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${namaSantri}</td>
+            <td>${jenisTagihan}</td>
+            <td>Rp ${parseInt(jumlahTagihan).toLocaleString()}</td>
+            <td>${jatuhTempo}</td>
+            <td>${statusTagihan.charAt(0).toUpperCase() + statusTagihan.slice(1)}</td>
+            <td><button class="btn btn-secondary btn-sm lihat-bukti" disabled>Bukti Tidak Tersedia</button></td>
+            <td>
+                <button class="btn btn-success btn-sm verifikasi-tagihan">Tandai Lunas</button>
+                <button class="btn btn-danger btn-sm tolak-tagihan">Tandai Belum Lunas</button>
+            </td>
+        `;
+                tbody.appendChild(row);
+
+                // Reset form dan tutup modal
+                formBuatTagihan.reset();
+                $('#modalBuatTagihan').modal('hide');
+
+                // Tambahkan logika untuk tombol baru jika diperlukan
+            });
+        });
+
+
     </script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

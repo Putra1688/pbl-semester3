@@ -1,6 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <style>
         * {
             margin: 0;
@@ -154,6 +160,15 @@
             border-bottom: 2px solid var(--background-color);
         }
 
+        .modal-dialog {
+            max-width: 500px;
+            margin: 1.75rem auto;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
         /* Tables */
         table {
             width: 100%;
@@ -245,15 +260,21 @@
 
         /* Modal */
         .modal {
+            display: none !important;
+            /* Pastikan modal hanya muncul dengan JS */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .modal.show {
+            display: flex !important;
+            /* Modal akan muncul dengan gaya flex */
         }
 
         .modal-content {
@@ -453,8 +474,8 @@
             <!-- Permission Section -->
             <section id="perizinan" class="content-section">
                 <h2>Perizinan</h2>
-                <button class="add-permission-btn" href="#perizinanBaru">Ajukan Perizinan Baru</button>
-
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAjukanPerizinan">Ajukan Perizinan
+                    Baru</button>
                 <table>
                     <thead>
                         <tr>
@@ -484,40 +505,52 @@
                 </table>
             </section>
 
-            <section id="perizinanBaru" class="content-section">
-                <h2>Ajukan Izin Baru</h2>
-                <form id="newPermissionForm">
-                    <div class="form-group">
-                        <label for="jenisIzin">Jenis Izin:</label>
-                        <select id="jenisIzin" name="jenisIzin" required>
-                            <option value="">Pilih Jenis Izin</option>
-                            <option value="pulang">Pulang</option>
-                            <option value="tidak_masuk">Tidak Masuk</option>
-                            <option value="lainnya">Lainnya</option>
-                        </select>
+            <div class="modal fade" id="modalAjukanPerizinan" tabindex="-1" role="dialog"
+                aria-labelledby="modalPerizinanLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalPerizinanLabel">Ajukan Perizinan Baru</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formAjukanPerizinan">
+                                <div class="form-group">
+                                    <label for="jenisIzin">Jenis Izin:</label>
+                                    <select class="form-control" id="jenisIzin" name="jenisIzin" required>
+                                        <option value="">Pilih Jenis Izin</option>
+                                        <option value="pulang">Pulang</option>
+                                        <option value="tidak_masuk">Tidak Masuk</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggalIzin">Tanggal Mulai Izin:</label>
+                                    <input type="date" class="form-control" id="tanggalIzin" name="tanggalIzin"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggalKembali">Tanggal Kembali:</label>
+                                    <input type="date" class="form-control" id="tanggalKembali" name="tanggalKembali"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alasan">Alasan Izin:</label>
+                                    <textarea class="form-control" id="alasan" name="alasan" rows="4"
+                                        required></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary" form="formAjukanPerizinan">Ajukan
+                                Izin</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="tanggalIzin">Tanggal Mulai Izin:</label>
-                        <input type="date" id="tanggalIzin" name="tanggalIzin" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="tanggalKembali">Tanggal Kembali:</label>
-                        <input type="date" id="tanggalKembali" name="tanggalKembali" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="alasan">Alasan Izin:</label>
-                        <textarea id="alasan" name="alasan" rows="4" required></textarea>
-                    </div>
-                    <button type="submit">Ajukan Izin</button>
-                </form>
-            </section>
-
-            <script>
-                document.querySelector('.add-permission-btn').addEventListener('click', function () {
-                    // Scroll ke section perizinanBaru
-                    document.getElementById('perizinanBaru').scrollIntoView({ behavior: 'smooth' });
-                });
-            </script>
+                </div>
+            </div>
 
 
             <!-- Payment Section -->
@@ -593,10 +626,24 @@
     </script>
 
     <script>
-        document.querySelector('.add-permission-btn').addEventListener('click', function () {
-            const formSection = document.getElementById('perizinanBaru');
-            formSection.style.display = 'block'; // Menampilkan form
-            formSection.scrollIntoView({ behavior: 'smooth' }); // Scroll ke form
+        document.getElementById('formAjukanPerizinan').addEventListener('submit', function (e) {
+            e.preventDefault(); // Mencegah reload halaman
+
+            // Ambil data dari form
+            const jenisIzin = document.getElementById('jenisIzin').value;
+            const tanggalIzin = document.getElementById('tanggalIzin').value;
+            const tanggalKembali = document.getElementById('tanggalKembali').value;
+            const alasan = document.getElementById('alasan').value;
+
+            // Simulasi pengiriman data ke server
+            console.log({ jenisIzin, tanggalIzin, tanggalKembali, alasan });
+
+            // Tampilkan pesan sukses (sesuaikan dengan kebutuhan)
+            alert('Perizinan berhasil diajukan!');
+
+            // Reset form dan tutup modal
+            this.reset();
+            $('#modalAjukanPerizinan').modal('hide');
         });
     </script>
 
@@ -623,6 +670,8 @@
                     }
                 });
             }
+
+
 
             links.forEach(link => {
                 link.addEventListener('click', function (event) {
