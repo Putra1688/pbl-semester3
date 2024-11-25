@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,81 +16,252 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
-        th, td {
-            border: 1px solid black;
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
             text-align: center;
-            padding: 8px;
+        }
+
+        td[colspan] {
+            text-align: left;
+            font-style: italic;
+        }
+
+        ol {
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            table th,
+            table td {
+                font-size: 0.8rem;
+            }
+        }
+        /* Style for the navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            /* Posisikan logo dan tombol kembali di sisi yang berbeda */
+            align-items: center;
+            /* Vertikal rata tengah */
+            background-color: #6fa8a9;
+            /* Warna latar belakang navbar */
+            padding: 1rem 2rem;
+            /* Ruang di dalam navbar */
+            height: 60px;
+            /* Tentukan tinggi navbar */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Tambahkan bayangan halus */
+        }
+
+        /* Style for the logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            /* Vertikal rata tengah */
+        }
+
+        .logo-icon {
+            width: 100px;
+            height: auto;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            /* Sesuaikan ukuran teks */
+            font-weight: bold;
+        }
+
+        /* Style for the back button */
+        .back-button {
+            background-color: rgba(255, 255, 255, 0.3);
+            /* Warna tombol transparan */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            /* Efek hover */
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        iframe {
+            border: none;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
-<body>
-    <img src="/public/img/takilm.jpg" alt="">
 
-    <h1>Kegiatan Rutinan Pondok Pesantren Ashabul Kahfi: Menghidupkan Tradisi Keilmuan dengan Sanad yang Jelas</h1>
-    <p>Pondok Pesantren Ashabul Kahfi memiliki kegiatan rutinan yang diikuti oleh seluruh santriwan dan santriwati 
-        sebagai bagian dari tradisi pendidikan Islam yang berakar pada nilai-nilai keilmuan, kebersamaan, dan keberkahan. 
-        Kegiatan ini dilaksanakan di bawah bimbingan para asatidz yang memiliki sanad keilmuan yang jelas dan terhubung 
-        hingga ke generasi ulama terdahulu, sehingga menjamin kemurnian ilmu yang diajarkan.</p>
-    <p>Kegiatan rutinan ini tidak hanya berfokus pada pengajaran ilmu agama, tetapi juga membangun karakter, kedisiplinan, dan semangat ukhuwah Islamiyah di kalangan para santri. Beberapa kegiatan utama yang menjadi bagian dari program rutin meliputi:</p>
-    <ol>
-        <li>Majelis Taklim Kajian Kitab</li>
-            <p>Taklim sendiri dijadwalkan setiap hari pada ba'da subuh hingga pukul 05.30 WIB dan ba'da maghrib sampai isya. Kitab taklim juga berbeda-beda yang diajarkan oleh para asatidz yang terpercaya. Berikut jadwal taklim yang diikuti oleh santriwan-santriwati</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Waktu</th>
-                        <th>Senin</th>
-                        <th colspan="2">Selasa</th>
-                        <th>Rabu</th>
-                        <th>Kamis</th>
-                        <th colspan="2">Jumat</th>
-                        <th colspan="2">Sabtu</th>
-                        <th>Ahad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ba'da Subuh</td>
-                        <td>Idhotun Nasyiin</td>
-                        <td colspan="2">Mukhtarul Hadist an-Nabawiyah</td>
-                        <td>Sirah An-Nabawiyyah</td>
-                        <td>Ta'lim Muta'alim</td>
-                        <td colspan="2">Mukhtarul Hadist an-Nabawiyah</td>
-                        <td colspan="2"><i>Nderes individu</i</td>
-                        <td>Targhib Wat Tarhib</td> 
-                    </tr>
-                    <tr>
-                        <td>Ba'da Maghrib</td>
-                        <td>At-Tibyan Fii Adabi Hammalatil Qur'an</td>
-                        <td>Jawahirul Lu'luiyah <br> <i>selasa ganjil</i></td>
-                        <td>Jalalul Afham <br><i>selasa genap</i></td>
-                        <td>Bil-Qolam</td>
-                        <td>Tahlil dan Pembacaan surat Al-Kahfi</td>
-                        <td>Idhotun Nasyiin <br><i>jumat ganjil</i></td>
-                        <td>Wasailul Wusul Ila Syamail Rasul <br><i>jumat genap</i></td>
-                        <td>Kifayatul Akhyar <br><i>sabtu ganjil</i></td>
-                        <td>Adabul Islam Fi Nidhomil Usra <br><i>sabtu genap</i></td>
-                        <td>Kegiatan Rutinan Mingguan</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-        <li>Khotmil Al-Qur'an</li>
-            <p>Menjadi rutinan pada minggu pertama setiap bulan, seluruh santriwan santriwati mengkhatamkan al-quran secara bersama-sama dimulai dari surat <i>al-fatihah</i> smapai <i>an-nass</i> yang diawali dengan mengirimkan doa dan pengkhususan kepada almarhum/almarhumah.
-            Untuk setiap minggunya, seluruh santri membaca <i>al-kahfi</i> pada setiap malam jumat setelah tahlil ba'da maghrib. Pembacaan al-quran bersama juga dilakukan apabila terdapat asatidz yang berhalangan hadir pada jadwal taklim</p>
-        <li>Dzikir dan Shalawat Berjamaah</li>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="/public/img/logo.png" alt="Logo" class="logo-icon">
+            <span class="logo-text">ASHABUL KAHFI</span>
+        </div>
+        <div class="nav-links">
+            <a href="/view/index.html" class="back-button">Kembali</a>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- section gambar  -->
+        <section class="image-section mb-5">
+            <img src="/public/img/takilm.jpg" alt="Kegiatan Taklim Rutin" class="img-fluid mx-auto d-block" data-aos="fade-up">
+        </section>
+
+    <section class="content-section">
+        <h1 data-aos="fade-right">Kegiatan Rutinan Pondok Pesantren Ashabul Kahfi</h1>
+        <p data-aos="fade-left">
+            Pondok Pesantren Ashabul Kahfi memiliki kegiatan rutinan yang diikuti oleh seluruh santriwan dan santriwati sebagai bagian dari tradisi pendidikan Islam yang berakar pada nilai-nilai keilmuan, kebersamaan, dan keberkahan.
+        </p>
+        <p data-aos="fade-left">
+            Kegiatan ini dilaksanakan di bawah bimbingan para asatidz yang memiliki sanad keilmuan yang jelas dan terhubung hingga ke generasi ulama terdahulu, sehingga menjamin kemurnian ilmu yang diajarkan.
+        </p>
+
+        <ol>
+            <li style="font-weight: bold;" data-aos="fade-left">Majelis Taklim Kajian Kitab</li>
+            <p data-aos="fade-up">
+                Taklim sendiri dijadwalkan setiap hari pada ba'da subuh hingga pukul 05.30 WIB dan ba'da maghrib sampai isya. Berikut jadwal taklim:
+            </p>
+            <div class="table-responsive" data-aos="fade-up">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Waktu</th>
+                            <th>Senin</th>
+                            <th colspan="2">Selasa</th>
+                            <th>Rabu</th>
+                            <th>Kamis</th>
+                            <th colspan="2">Jumat</th>
+                            <th colspan="2">Sabtu</th>
+                            <th>Ahad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ba'da Subuh</td>
+                            <td>Idhotun Nasyiin</td>
+                            <td colspan="2">Mukhtarul Hadist</td>
+                            <td>Sirah An-Nabawiyyah</td>
+                            <td>Ta'lim Muta'alim</td>
+                            <td colspan="2">Mukhtarul Hadist</td>
+                            <td colspan="2"><i>Nderes Individu</i></td>
+                            <td>Targhib Wat Tarhib</td>
+                        </tr>
+                        <tr>
+                            <td>Ba'da Maghrib</td>
+                            <td>At-Tibyan</td>
+                            <td>Jawahirul Lu'luiyah</td>
+                            <td>Jalalul Afham</td>
+                            <td>Bil-Qolam</td>
+                            <td>Tahlil</td>
+                            <td>Idhotun Nasyiin</td>
+                            <td>Wasailul Wusul</td>
+                            <td>Kifayatul Akhyar</td>
+                            <td>Adabul Islam</td>
+                            <td>Kegiatan Mingguan</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <li style="font-weight: bold;" data-aos="fade-left">Khotmil Al-Qur'an</li>
+            <p data-aos="fade-up">
+                Menjadi rutinan pada minggu pertama setiap bulan, seluruh santriwan santriwati mengkhatamkan Al-Qur'an secara bersama-sama.
+            </p>
+
+            <li style="font-weight: bold;" data-aos="fade-left">Dzikir dan Shalawat Berjamaah</li>
             <ol type="a">
-                <li>Dzikir Basyairul Khoirot</li>
-                    <p>Merupakan dzikir karangan Syaikh Abdul Qadir Al-Jailani yang dibaca secara bersama-sama seluruh santri yang dipimpin secara langsung oleh pengasuh pondok</p>
-                <li>Pemacaan Sholawat diba'</li>
-                    <p>Tradisi membaca atau melantunkan sholawat kepada Nabi Muhammad dalam rangka sirah Rasulullah yang dilantunkan secara bersama-sama</p>
+                <li data-aos="fade-up">Dzikir Basyairul Khoirot</li>
+                <p data-aos="fade-right">Merupakan dzikir karangan Syaikh Abdul Qadir Al-Jailani yang dibaca secara bersama-sama seluruh santri yang dipimpin secara langsung oleh pengasuh pondok</p>
+                <li data-aos="fade-up">Pembacaan Sholawat Diba'</li>
+                <p data-aos="fade-right">Tradisi membaca sholawat bersama seluruh santri.</p>
             </ol>
-    </ol>
-    <p>Kegiatan rutinan ini tidak hanya memperkuat keilmuan, tetapi juga mempererat hubungan antar santri dan para asatidz. Tradisi sanad yang dipegang erat dalam pengajaran memberikan nilai istimewa, karena ilmu yang diajarkan bersumber dari jalur yang dapat dipercaya dan penuh berkah. Mari bergabung dalam keberkahan ini, bersama Pondok Pesantren Ashabul Kahfi, mencetak generasi muda yang alim, berakhlak mulia, dan siap mengabdi untuk umat.</p>
+        </ol>
+        <p data-aos="fade-left">Kegiatan rutinan ini tidak hanya memperkuat keilmuan, tetapi juga mempererat hubungan antar santri dan para asatidz. Tradisi sanad yang dipegang erat dalam pengajaran memberikan nilai istimewa, karena ilmu yang diajarkan bersumber dari jalur yang dapat dipercaya dan penuh berkah. Mari bergabung dalam keberkahan ini, bersama Pondok Pesantren Ashabul Kahfi, mencetak generasi muda yang alim, berakhlak mulia, dan siap mengabdi untuk umat.</p>
+    </section>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
@@ -99,106 +271,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-
-        // Initialize Swiper
-        new Swiper('.swiper', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                },
-                768: {
-                    slidesPerView: 2,
-                },
-                1024: {
-                    slidesPerView: 3,
-                },
-            }
-        });
-
-        // Dark mode toggle with proper theme handling
-        const darkModeToggle = document.querySelector('.dark-mode-toggle');
-        const html = document.documentElement;
-
-        function toggleDarkMode() {
-            const isDark = html.getAttribute('data-bs-theme') === 'dark';
-            const newTheme = isDark ? 'light' : 'dark';
-            html.setAttribute('data-bs-theme', newTheme);
-            darkModeToggle.textContent = isDark ? '🌓' : '☀️';
-            localStorage.setItem('theme', newTheme);
-        }
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            html.setAttribute('data-bs-theme', savedTheme);
-            darkModeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌓';
-        }
-
-        darkModeToggle.addEventListener('click', toggleDarkMode);
-
-        // Smooth scroll with offset for fixed navbar
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                // Close mobile menu if open
-                const navbarToggler = document.querySelector('.navbar-toggler');
-                const navbarCollapse = document.querySelector('.navbar-collapse');
-                if (navbarCollapse.classList.contains('show')) {
-                    navbarToggler.click();
-                }
-
-                // Smooth scroll to target
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerOffset = 80;
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Active nav link highlighting
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', () => {
-            const scrollY = window.pageYOffset;
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 100;
-                const sectionId = section.getAttribute('id');
-                const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    navLink?.classList.add('active');
-                } else {
-                    navLink?.classList.remove('active');
-                }
-            });
-        });
+        AOS.init();
     </script>
-    
 </body>
+
 </html>
