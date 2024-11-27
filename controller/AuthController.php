@@ -3,6 +3,7 @@ require_once 'Model/UserModel.php';
 
 class AuthController 
 {
+    // function register
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
@@ -24,6 +25,7 @@ class AuthController
             }
     }
 
+    // function login
     public function login()
     {
         session_start();

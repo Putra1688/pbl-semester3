@@ -1,5 +1,7 @@
 <?php 
 require_once 'Model/BaseModel.php';
+
+// inheritance
 class UserModel extends BaseModel
 {
     public function register($email, $password) {
